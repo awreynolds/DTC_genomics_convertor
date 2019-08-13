@@ -1,12 +1,11 @@
 #!/usr/bin/env Rscript
 ### A command line tool to validate that an input file is in 23andMe raw data format ###
-### Heavily inspired by https://github.com/awreynolds/DTC_genomics_convertor/blob/master/DTC_genomics_convertor.r
+### Heavily inspired by https://github.com/awreynolds/DTC_genomics_convertor/blob/master/DTC_genomics_convertor.r ###
 ### Phil Palmer ###
 ### phil@lifebit.ai ###
 ### August 2019 ###
 
 # opt<-list()
-# opt$file<-"~/Documents/GitHub/common-latest-geno/test/bad_file.txt"
 # opt$file<-"~/Documents/GitHub/common-latest-geno/test/8589.23andme.6953"
 
 #welcome text
@@ -61,7 +60,7 @@ validate_header <- function(df) {
   }
 }
 validate_nspns <- function(df) {
-  snps <- nrow(input_df)
+  snps <- nrow(df)
   if (snps < 100000) {
     error_message <- paste0("It looks like there are only ", snps, " SNPs in your input file")
     warning(error_message)
@@ -78,7 +77,7 @@ validate_23AndMe <- function(x) {
   # check column header - commented w/ the correct names
   validate_header(input_df)
   # check the number of snps
-  validate_nspns
+  validate_nspns(input_df)
   message("Input 23AndMe file passed validation succesfully.")
 }
 
